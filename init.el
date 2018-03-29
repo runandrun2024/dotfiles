@@ -151,26 +151,26 @@
 ;; @ scroll
 
 ;; バッファの先頭までスクロールアップ
-;; (defadvice scroll-up (around scroll-up-around)
-;;   (interactive)
-;;   (let* ( (start_num (+ 1 (count-lines (point-min) (point))) ) )
-;; 	(goto-char (point-max))
-;; 	(let* ( (end_num (+ 1 (count-lines (point-min) (point))) ) )
-;; 	  (goto-line start_num )
-;; 	  (let* ( (limit_num (- (- end_num start_num) (window-height)) ))
-;; 		(if (< (- (- end_num start_num) (window-height)) 0)
-;; 			(goto-char (point-max))
-;; 		  ad-do-it)) )) )
-;; (ad-activate 'scroll-up)
+(defadvice scroll-up (around scroll-up-around)
+  (interactive)
+  (let* ( (start_num (+ 1 (count-lines (point-min) (point))) ) )
+	(goto-char (point-max))
+	(let* ( (end_num (+ 1 (count-lines (point-min) (point))) ) )
+	  (goto-line start_num )
+	  (let* ( (limit_num (- (- end_num start_num) (window-height)) ))
+		(if (< (- (- end_num start_num) (window-height)) 0)
+			(goto-char (point-max))
+		  ad-do-it)) )) )
+(ad-activate 'scroll-up)
 
 ;; バッファの最後までスクロールダウン
-;; (defadvice scroll-down (around scroll-down-around)
-;;   (interactive)
-;;   (let* ( (start_num (+ 1 (count-lines (point-min) (point)))) )
-;; 	(if (< start_num (window-height))
-;; 		(goto-char (point-min))
-;; 	  ad-do-it) ))
-;; (ad-activate 'scroll-down)
+(defadvice scroll-down (around scroll-down-around)
+  (interactive)
+  (let* ( (start_num (+ 1 (count-lines (point-min) (point)))) )
+	(if (< start_num (window-height))
+		(goto-char (point-min))
+	  ad-do-it) ))
+(ad-activate 'scroll-down)
 
 ;; Window間の移動を矢印キーで行う。
 (windmove-default-keybindings)
@@ -188,6 +188,7 @@
 			'(lambda()
 			   (c-set-style "stroustrup")
 			   (c-set-offset 'inline-open 0)
+			   (c-set-offset 'innamespace 0)
 			   (setq c-auto-newline t)
 			   (setq tab-width 4))))
 
@@ -242,13 +243,13 @@
   (define-key company-active-map (kbd "<tab>") 'company-complete-selection))
 
 ;; rtags
-(use-package rtags
-  :config
-  (progn
-    (rtags-enable-standard-keybindings c-mode-base-map)
-						; 関数cmake-ide-setupを呼ぶのはrtagsをrequireしてから。
-    (cmake-ide-setup)))
-
+;; (use-package rtags
+;;   :config
+;;   (progn
+;;     (rtags-enable-standard-keybindings c-mode-base-map)
+;; 						; 関数cmake-ide-setupを呼ぶのはrtagsをrequireしてから。
+;;     (cmake-ide-setup)))
+ 
 ;; irony 
 (defun my-irony-mode-hook ()
   (define-key irony-mode-map
@@ -294,6 +295,12 @@
   (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode)))
 
 ;; ----------------------------------------------------------------------------
+;; clipbordを使ってコピペ
+(cond
+ (window-system (setq x-select-enable-clipboard t))
+)
+
+;; ----------------------------------------------------------------------------
 ;; @ OS
 (if (eq window-system 'w32)	(load "init-win"))
 (if (eq window-system 'x)	(load "init-linux"))
@@ -316,3 +323,33 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+(put 'downcase-region 'disabled nil)
+(put 'upcase-region 'disabled nil)
+
+;; -nw 起動時のColor theme
+(unless (display-graphic-p)
+  	(load-theme 'manoj-dark)
+	(enable-theme 'manoj-dark))
+
+;; emacs term内のcolor設定
+;; (setq ansi-term-color-vector
+;;	  [unspecified "black" "red1" "lime green" "yellow2"
+;;				   "DeepSkyBlue3" "magenta2" "cyan2" "white"])
+(setq ansi-term-color-vector                                                
+      [term
+       term-color-black
+       term-color-red
+       term-color-green
+       term-color-yellow
+       term-color-cyan
+       term-color-magenta                                                   
+       term-color-cyan
+       term-color-white
+       term-color-black
+       term-color-red
+       term-color-green
+       term-color-yellow
+       term-color-cyan
+       term-color-magenta
+       term-color-cyan
+       term-color-white])                              
