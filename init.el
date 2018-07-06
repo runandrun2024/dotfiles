@@ -31,7 +31,7 @@
 ;; 環境変数
 (use-package exec-path-from-shell
   :config
-  (let ((envs '("PATH" "GOPATH")))
+  (let ((envs '("PATH" "GOPATH" "FOR_MACOS_BUG")))
 	(exec-path-from-shell-copy-envs envs)))
 
 ;; ------------------------------------------------------------------------
