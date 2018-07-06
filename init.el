@@ -26,6 +26,14 @@
 (add-to-list 'load-path "~/.emacs.d/sites")
 (require 'use-package)
 
+
+;; ------------------------------------------------------------------------
+;; 環境変数
+(use-package exec-path-from-shell
+  :config
+  (let ((envs '("PATH" "GOPATH")))
+	(exec-path-from-shell-copy-envs envs)))
+
 ;; ------------------------------------------------------------------------
 ;; @ frame
 
@@ -353,3 +361,4 @@
        term-color-magenta
        term-color-cyan
        term-color-white])                              
+
