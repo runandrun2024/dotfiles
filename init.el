@@ -370,5 +370,14 @@
        term-color-cyan
        term-color-white])                              
 
+;; ハイライト
+(global-hl-line-mode t)                 ;; 現在行をハイライト
+(custom-set-faces '(hl-line ((t (:background "color-236")))))
+
+;; 対応する括弧のハイライト
+(show-paren-mode t)                     ;; 対応する括弧をハイライト
+(setq show-paren-style 'parenthesis)    ;; 対応する括弧だけをハイライト
+
+
 ;; フルスクリーン起動
 (set-frame-parameter nil 'fullscreen 'maximized)
