@@ -320,6 +320,9 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(irony-additional-clang-options (quote ("-std=c++11")))
+ '(package-selected-packages
+   (quote
+	(flycheck use-package php-mode go-mode ggtags exec-path-from-shell)))
  '(safe-local-variable-values
    (quote
 	((cmake-ide-dir . /home/yamamoto/projects/intage/fastcontainer/build/Debug)
@@ -361,3 +364,5 @@
        term-color-cyan
        term-color-white])                              
 
+;; フルスクリーン起動
+(set-frame-parameter nil 'fullscreen 'maximized)
