@@ -280,7 +280,7 @@
     (add-hook 'irony-mode-hook 'company-irony-setup-begin-commands)
     (add-hook 'irony-mode-hook 'my-irony-mode-hook)
     (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
-    ;; (add-hook 'irony-mode-hook 'irony-eldoc)
+    (add-hook 'irony-mode-hook 'irony-eldoc)
     (add-to-list 'company-backends 'company-irony)
     )
   )
@@ -328,7 +328,7 @@
  '(irony-additional-clang-options (quote ("-std=c++11")))
  '(package-selected-packages
    (quote
-	(flycheck use-package php-mode go-mode ggtags exec-path-from-shell)))
+	(irony-eldoc flycheck use-package php-mode go-mode ggtags exec-path-from-shell)))
  '(safe-local-variable-values
    (quote
 	((cmake-ide-dir . /home/yamamoto/projects/intage/fastcontainer/build/Debug)
@@ -338,7 +338,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(hl-line ((t (:background "color-236")))))
 (put 'downcase-region 'disabled nil)
 (put 'upcase-region 'disabled nil)
 
@@ -372,7 +372,7 @@
 
 ;; ハイライト
 (global-hl-line-mode t)                 ;; 現在行をハイライト
-(custom-set-faces '(hl-line ((t (:background "color-236")))))
+
 
 ;; 対応する括弧のハイライト
 (show-paren-mode t)                     ;; 対応する括弧をハイライト
