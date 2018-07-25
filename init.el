@@ -196,7 +196,7 @@
 			   (c-set-style "stroustrup")
 			   (c-set-offset 'inline-open 0)
 			   (c-set-offset 'innamespace 0)
-			   (setq c-auto-newline t)
+			   ;; (setq c-auto-newline t)
 			   (setq tab-width 4))))
 
 ;; auto complete
