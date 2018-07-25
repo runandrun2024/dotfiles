@@ -187,6 +187,9 @@
 ;; デフォルトのtab幅設定
 (setq default-tab-width 4)
 
+;; 閉じ括弧自動入力
+(electric-pair-mode 1)
+
 ;; 各種メジャーモード
 ;; cc-mode style(C,C++,Java,Objective-C)
 (use-package cc-mode
