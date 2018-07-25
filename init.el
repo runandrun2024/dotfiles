@@ -238,8 +238,9 @@
      (define-key yas-keymap (kbd "<tab>") nil)
      (yas-global-mode 1)))
 
-;; company mode
-(when (locate-library "company")
+;; company mode : 補完用パッケージ
+(use-package company
+  :config
   (global-company-mode 1)
   (global-set-key (kbd "C-M-i") 'company-complete)
   ;; (setq company-idle-delay nil) ; 自動補完をしない
@@ -276,12 +277,14 @@
     (add-hook 'irony-mode-hook 'company-irony-setup-begin-commands)
     (add-hook 'irony-mode-hook 'my-irony-mode-hook)
     (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
-    (add-hook 'irony-mode-hook 'irony-eldoc)
+    ;; (add-hook 'irony-mode-hook 'irony-eldoc)
     (add-to-list 'company-backends 'company-irony)
     )
   )
 
-(add-hook 'c++-mode-hook 'flycheck-mode)
+;;(add-hook 'c++-mode-hook 'flycheck-mode)
+;;(add-hook 'c-mode-hook 'flycheck-mode)
+(add-hook 'c++-mode-hook (lambda () (setq flycheck-gcc-language-standard "c++11")))
 (add-hook 'c-mode-hook 'flycheck-mode)
 (add-hook 'c++-mode-hook 'irony-mode)
 (add-hook 'c-mode-hook 'irony-mode)
