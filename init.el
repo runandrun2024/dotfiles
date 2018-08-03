@@ -223,15 +223,25 @@
     (add-hook 'flycheck-mode-hook #'flycheck-irony-setup)))
 
 ;; cmake-ide
-(use-package cmake-ide
-  :bind
-  (("<f9>" . cmake-ide-compile))
+;; (use-package cmake-ide
+;;   :bind
+;;   (("<f9>" . cmake-ide-compile))
+;;   :config
+;;   (progn
+;;     (setq 
+;;      ; rdm & rcコマンドへのパス。コマンドはRTagsのインストール・ディレクトリ下。
+;;      cmake-ide-rdm-executable "/usr/local/bin/rdm"
+;;      cmake-ide-rc-executable  "/usr/local/bin/rc")))
+;;
+
+;; cmake-mode
+(use-package cmake-mode
   :config
-  (progn
-    (setq 
-     ; rdm & rcコマンドへのパス。コマンドはRTagsのインストール・ディレクトリ下。
-     cmake-ide-rdm-executable "/usr/local/bin/rdm"
-     cmake-ide-rc-executable  "/usr/local/bin/rc")))
+  (setq auto-mode-alist
+	  (append
+	   '(("CMakeLists\\.txt\\'" . cmake-mode))
+	   '(("\\.cmake\\'" . cmake-mode))
+	   auto-mode-alist)))
 
 
 ;; yasnippet
@@ -373,7 +383,9 @@
 ;; ハイライト
 (global-hl-line-mode t)                 ;; 現在行をハイライト
 
-
+(custom-set-faces
+'(hl-line ((t (:background "color-200"))))
+)
 ;; 対応する括弧のハイライト
 (show-paren-mode t)                     ;; 対応する括弧をハイライト
 (setq show-paren-style 'parenthesis)    ;; 対応する括弧だけをハイライト
