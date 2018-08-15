@@ -295,6 +295,20 @@
     )
   )
 
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(irony-additional-clang-options (quote ("-std=c++11")))
+ '(package-selected-packages
+   (quote
+	(irony-eldoc flycheck use-package php-mode go-mode ggtags exec-path-from-shell)))
+ '(safe-local-variable-values
+   (quote
+	((cmake-ide-dir . /home/yamamoto/projects/intage/fastcontainer/build/Debug)
+	 (cmake-ide-dir . ~/projects/intage/fastcontainer/build/Debug)))))
+
 ;;(add-hook 'c++-mode-hook 'flycheck-mode)
 ;;(add-hook 'c-mode-hook 'flycheck-mode)
 (add-hook 'c++-mode-hook (lambda () (setq flycheck-gcc-language-standard "c++11")))
@@ -330,19 +344,7 @@
 (if (eq window-system 'ns)	(load "init-mac"))
 (if (eq window-system 'mac)	(load "init-mac"))
 
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(irony-additional-clang-options (quote ("-std=c++11")))
- '(package-selected-packages
-   (quote
-	(irony-eldoc flycheck use-package php-mode go-mode ggtags exec-path-from-shell)))
- '(safe-local-variable-values
-   (quote
-	((cmake-ide-dir . /home/yamamoto/projects/intage/fastcontainer/build/Debug)
-	 (cmake-ide-dir . ~/projects/intage/fastcontainer/build/Debug)))))
+;; ---------------------------------------------------------------------------------
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -352,10 +354,20 @@
 (put 'downcase-region 'disabled nil)
 (put 'upcase-region 'disabled nil)
 
-;; -nw 起動時のColor theme
-(unless (display-graphic-p)
-  	(load-theme 'manoj-dark)
-	(enable-theme 'manoj-dark))
+;; 起動時のColor theme
+;; (unless (display-graphic-p)
+;;   	(load-theme 'manoj-dark)
+;; 	(enable-theme 'manoj-dark))
+(load-theme 'manoj-dark t)
+
+;; IME OFF時の初期カーソルカラー
+(set-cursor-color "green")
+
+;; IME ON/OFF時のカーソルカラー
+(add-hook 'input-method-activate-hook
+		  (lambda() (set-cursor-color "red")))
+(add-hook 'input-method-inactivate-hook
+		  (lambda() (set-cursor-color "green")))
 
 ;; emacs term内のcolor設定
 ;; (setq ansi-term-color-vector
@@ -383,13 +395,19 @@
 ;; ハイライト
 (global-hl-line-mode t)                 ;; 現在行をハイライト
 
-(custom-set-faces
-'(hl-line ((t (:background "color-200"))))
-)
 ;; 対応する括弧のハイライト
 (show-paren-mode t)                     ;; 対応する括弧をハイライト
 (setq show-paren-style 'parenthesis)    ;; 対応する括弧だけをハイライト
 
+;;; Frame parameters
+(setq default-frame-alist
+      (append '((vertical-scroll-bars . nil) ;;スクロールバーはいらない
+		(vertical-scroll-bars . right)
+		(line-spacing . 0)
+		(cursor-type . box))
+			  default-frame-alist))
+
+(setq initial-frame-alist default-frame-alist)
 
 ;; フルスクリーン起動
 (set-frame-parameter nil 'fullscreen 'maximized)
