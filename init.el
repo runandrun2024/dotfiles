@@ -183,6 +183,9 @@
 (windmove-default-keybindings)
 (setq windmove-wrap-around t)
 
+;; 行番号を指定してジャンプ
+(global-set-key "\C-G" 'goto-line)
+
 ;; ----------------------------------------------------------------------------
 ;; デフォルトのtab幅設定
 (setq default-tab-width 4)
@@ -336,7 +339,7 @@
 ;; neotree
 (use-package neotree
   :config
-  (global-set-key [f8] 'neotree-toggle)  ;; F8でトグル
+  (global-set-key "\C-q" 'neotree-toggle)  ;; F8でトグル
   (setq neo-smart-open t)           ;; neotreeを開いた時のカレントファイルのディレクトリを表示する
   (setq neo-show-hidden-files t))    ;; 隠しファイルをデフォルトで表示
 
