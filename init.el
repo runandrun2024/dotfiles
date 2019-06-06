@@ -184,7 +184,7 @@
 (setq windmove-wrap-around t)
 
 ;; 行番号を指定してジャンプ
-(global-set-key "\C-G" 'goto-line)
+(global-set-key [?\C-\S-g] 'goto-line)
 
 ;; ----------------------------------------------------------------------------
 ;; デフォルトのtab幅設定
