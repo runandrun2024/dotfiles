@@ -202,6 +202,8 @@
 			   ;; (setq c-auto-newline t)
 			   (setq tab-width 4))))
 
+(add-to-list 'auto-mode-alist '("\\.tcc\\'" . cc-mode))
+
 ;; auto complete
 (use-package auto-complete
   :config
@@ -303,7 +305,7 @@
  '(irony-additional-clang-options (quote ("-std=c++11")))
  '(package-selected-packages
    (quote
-	(irony-eldoc flycheck use-package php-mode go-mode ggtags exec-path-from-shell)))
+	(neotree php-mode irony-eldoc flycheck use-package go-mode ggtags exec-path-from-shell)))
  '(safe-local-variable-values
    (quote
 	((cmake-ide-dir . /home/yamamoto/projects/intage/fastcontainer/build/Debug)
@@ -330,6 +332,13 @@
 (use-package markdown-mode
   :config
   (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode)))
+
+;; neotree
+(use-package neotree
+  :config
+  (global-set-key [f8] 'neotree-toggle)  ;; F8でトグル
+  (setq neo-smart-open t)           ;; neotreeを開いた時のカレントファイルのディレクトリを表示する
+  (setq neo-show-hidden-files t))    ;; 隠しファイルをデフォルトで表示
 
 ;; ----------------------------------------------------------------------------
 ;; clipbordを使ってコピペ
