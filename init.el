@@ -308,7 +308,7 @@
  '(irony-additional-clang-options (quote ("-std=c++11")))
  '(package-selected-packages
    (quote
-	(neotree php-mode irony-eldoc flycheck use-package go-mode ggtags exec-path-from-shell)))
+	(flycheck-rust racer neotree php-mode irony-eldoc flycheck use-package go-mode ggtags exec-path-from-shell)))
  '(safe-local-variable-values
    (quote
 	((cmake-ide-dir . /home/yamamoto/projects/intage/fastcontainer/build/Debug)
@@ -342,6 +342,26 @@
   (global-set-key "\C-q" 'neotree-toggle)  ;; F8でトグル
   (setq neo-smart-open t)           ;; neotreeを開いた時のカレントファイルのディレクトリを表示する
   (setq neo-show-hidden-files t))    ;; 隠しファイルをデフォルトで表示
+
+;; rust
+(use-package rust-mode
+  :config
+  ;; ファイルのサフィックスを登録
+  (add-to-list 'auto-mode-alist '("\\.rs\\'"  . rust-mode))
+
+
+  ;; rustのファイルを編集するときにracerとflycheckを起動する
+  (add-hook 'rust-mode-hook (lambda ()
+							  (racer-mode)
+							  (flycheck-rust-setup)))
+  ;; racerの補完サポート
+  (add-hook 'racer-mode-hook (lambda () (company-mode)))
+
+  ;; コンパイラにパスを通す
+  (add-to-list 'exec-path(expand-file-name "~/.cargo/bin/"))
+
+  ;; racerのeldocサポート
+  (add-hook 'racer-mode-hook #'eldoc-mode))
 
 ;; ----------------------------------------------------------------------------
 ;; clipbordを使ってコピペ
