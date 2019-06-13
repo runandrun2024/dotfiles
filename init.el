@@ -186,6 +186,8 @@
 ;; 行番号を指定してジャンプ
 (global-set-key [?\C-\S-g] 'goto-line)
 
+;; other-window
+(global-set-key "\C-t" 'other-window)
 ;; ----------------------------------------------------------------------------
 ;; デフォルトのtab幅設定
 (setq default-tab-width 4)
@@ -351,9 +353,8 @@
 
 
   ;; rustのファイルを編集するときにracerとflycheckを起動する
-  (add-hook 'rust-mode-hook (lambda ()
-							  (racer-mode)
-							  (flycheck-rust-setup)))
+  (add-hook 'rust-mode-hook (lambda () (racer-mode) (flycheck-rust-setup)))
+  
   ;; racerの補完サポート
   (add-hook 'racer-mode-hook (lambda () (company-mode)))
 
